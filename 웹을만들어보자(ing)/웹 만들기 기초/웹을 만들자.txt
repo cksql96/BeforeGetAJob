@@ -1,0 +1,30 @@
+기본사항
+Eclipse를 깔기.
+Apache Tomcat깔기.
+Oracle Database 깔기.
+
+1. Eclipse에서 Spring Legacy Project를 생성합니다.
+2. 시작전 기본 설정을 바꾸기 위해 
+	2-1. pom.xml을 바꾸고, 업데이트하며 직관성을 위해 조정을 합니다.
+	2-2. java resources의 log4j.xml파일의 DOCTYPE또한 변경을 해주며, 프로젝트에 맞게 logger의 level을 변경해줍니다.
+	2-3. Web.xml의 web-app버젼을 바꾸어줍니다. 
+		2-3-1. <servlet>에 throwExceptionIfNoHandlerFound라는 <param-name>을 <init-param>에 추가해주며, <param-value>는 true로 해줍니다.
+		2-3-2. encoding <filter>를 추가해줍니다.
+	2-4. root-context.xml에서는 Namespaces에서 beans, context, mybatis-spring(사용하면)클릭을 해줍니다.
+		2-4-1. <mybatis-spring:scan>을 추가해주며, 이곳에 사용할 <bean>들을 추가해줍니다.(연결설정)
+	2-5. servlet-context.xml 에서는 root-context와 같이 Namespaces를 추가해주고, <context:component-scan>을 알맞게 설정해줍니다.
+	2-6. 프로젝트의 properties를 바꿔줍니다. 또한 라이브러리를 추가해줍니다.
+		2-3-1. 저는 아래에서부터 변경을 해주는데 
+			처음 web Project Setting의 root를 /로 설정하였습니다.
+		2-3-2. web content Setting에서 document type을 html5로, css profile을 level3로 설정하였습니다.
+		2-3-3. Targeted Runtimes에서 Apache Tomcat v9.0설정 및 Server또한 9.0로 설정하였습니다.
+		2-3-4. JSP Fragment에서는 Language를 자바로, Content Type을 text/html로 설정하였습니다.
+		2-3-5. Java Build Path에서 External Jars파일을 추가를 누르고, ojdbc8.jar를 추가해주었습니다.
+		2-3-6. Deployment Assembly에서 ojdbc8을 추가하였습니다.
+	2-7. 모든 설정이 완료되면, Apply&Close를 눌러줍니다.
+3. 모든게 끝나고 혹시 모르니, 프로젝트의 Maven Update 를 눌러주어 업데이트를 해줍니다.
+4. 이후 Run on server를 통해 실행하게 되면, Hello World가 찍히게 되면 기본 설정 완성입니다.
+----------------------------------------------------------------------------------------------------------
+
+5. Log4j를 설정하였으니, Java Resources의 HomeController에서 Logger 대신 Log4j를 사용합니다.
+6. src/main/webapp/WEB-INF/views/home.jsp를 들어가 html5형식으로 바꾸어주고, charset도 바꾸어줍니다.
